@@ -3,11 +3,7 @@ import hou_nodes
 
 def run():
     midi_file: midi.mido.MidiFile = midi.read_from_file("C:\\Disque E\\Prog\\python_midi\\assets\\YLIA.mid")
-    tracks_messages = []
-    for track in midi_file.tracks:
-        messages: list[dict] = midi.get_all_notes_from_track(track)
-        if messages:
-            tracks_messages.append(messages)
+    tracks = midi.get_all_tracks_from_midi_file(midi_file)
 
     context = hou_nodes.get_curr_context()
     hou_nodes.create_channel_node(context, 88)

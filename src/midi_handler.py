@@ -16,6 +16,13 @@ def show_messages_from_track(track: mido.MidiTrack, start: int, nb_of_messages: 
     for msg in track[start: start + nb_of_messages]:
         print(msg)
 
+def get_all_tracks_from_midi_file(midi_file: mido.MidiFile) -> list[list[dict]]:
+    tracks_messages = []
+    for track in midi_file.tracks:
+        messages: list[dict] = get_all_notes_from_track(track)
+        if messages:
+            tracks_messages.append(messages)
+
 def get_all_notes_from_track(track: mido.MidiTrack)->list[dict]:
     notes: list[dict] = []
     for i, msg in enumerate(track):
