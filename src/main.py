@@ -1,10 +1,20 @@
-import midi_handler as midi
+import os
+import sys
 
-if __name__ == "__main__":
-    midi_file: midi.mido.MidiFile = midi.read_from_file("assets\YLIA.mid")
-    tracks_messages = []
-    for track in midi_file.tracks:
-        messages: list[dict] = midi.get_all_notes_from_track(track)
-        if messages:
-            tracks_messages.append(messages[5])
-    print(tracks_messages)
+
+def run() -> None:
+    plugin_path = os.environ["HOUDINI_PIANO_PLUGIN_PATH"]
+
+    sys.path.insert(0, plugin_path)
+
+    from importlib import reload
+    import hou_nodes as nodes
+    import midi_handler as midi
+    import piano as piano
+
+    reload(nodes)
+    reload(midi)
+    reload(piano)
+
+
+run()
