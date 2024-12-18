@@ -6,5 +6,5 @@ if __name__ == "__main__":
     for track in midi_file.tracks:
         messages: list[dict] = midi.get_all_notes_from_track(track)
         if messages:
-            tracks_messages.append(messages[0])
+            tracks_messages.append(messages[5])
     print(tracks_messages)
