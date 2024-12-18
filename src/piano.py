@@ -11,6 +11,7 @@ def run():
     context = hou_nodes.get_curr_context()
     channel_node = hou_nodes.create_channel_node(context, 88)
     hou_nodes.animate_notes_by_track(channel_node, tracks[0], 1010)
+    hou_nodes.transfer_chop_to_attrib(hou_nodes.get_selected_node(), channel_node)
 
 
 run()

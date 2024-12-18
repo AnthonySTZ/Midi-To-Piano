@@ -3,10 +3,15 @@ import midi_handler as midi
 
 
 def get_curr_context():
+    selected_node = get_selected_node()
+    return selected_node.parent()
+
+
+def get_selected_node():
     selected_nodes = hou.selectedNodes()
     if not selected_nodes:
         raise ValueError("No nodes selected")
-    return selected_nodes[0].parent()
+    return selected_nodes[0]
 
 
 def create_channel_node(context, number_of_notes):
@@ -41,3 +46,14 @@ def set_keyframe(parm, frame, value):
     key.setFrame(frame)
     key.setValue(value)
     parm.setKeyframe(key)
+
+
+def transfer_chop_to_attrib(seleted_node, channel_node):
+    rel_path = seleted_node.relativePathTo(channel_node)
+    code = 'f@active = chf("' + rel_path + '/value" + itoa(@ptnum) + "x");'
+
+    parent_node = seleted_node.parent()
+    wrangle = parent_node.createNode("attribwrangle", "transfer_animation")
+    wrangle.setInput(0, seleted_node, 0)
+
+    wrangle.parm("snippet").set(code)
