@@ -20,6 +20,6 @@ def get_all_notes_from_track(track: mido.MidiTrack)->list[dict]:
     notes: list[dict] = []
     for i, msg in enumerate(track):
         if msg.type == "note_on" or msg.type == "note_off":
-            note = {"type": msg.type, "note": msg.note - 21, "offset" : notes[-1]["offset"] + msg.time if notes else 0}
+            note = {"type": msg.type, "note": msg.note - 21, "offset" : notes[-1]["offset"] + msg.time if notes else msg.time}
             notes.append(note)
     return notes
