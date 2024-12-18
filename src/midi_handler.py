@@ -22,6 +22,7 @@ def get_all_tracks_from_midi_file(midi_file: mido.MidiFile) -> list[list[dict]]:
         messages: list[dict] = get_all_notes_from_track(track)
         if messages:
             tracks_messages.append(messages)
+    return tracks_messages
 
 def get_all_notes_from_track(track: mido.MidiTrack)->list[dict]:
     notes: list[dict] = []
