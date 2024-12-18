@@ -2,6 +2,9 @@ import midi_handler as midi
 
 if __name__ == "__main__":
     midi_file: midi.mido.MidiFile = midi.read_from_file("assets\YLIA.mid")
-    messages: list[dict] = midi.get_all_notes_from_track(midi_file.tracks[3])
-    print(messages[0:5])
-    # midi.show_messages_from_track(midi_file.tracks[3], 17, 10)
+    tracks_messages = []
+    for track in midi_file.tracks:
+        messages: list[dict] = midi.get_all_notes_from_track(track)
+        if messages:
+            tracks_messages.append(messages[0])
+    print(tracks_messages)
