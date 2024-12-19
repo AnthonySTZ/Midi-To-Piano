@@ -9,13 +9,11 @@ from PySide2.QtWidgets import (
     QSizePolicy,
     QFileDialog,
     QLabel,
+    QHBoxLayout,
+    QWidget,
 )
 from PySide2.QtCore import Qt
-
-
-def getHoudiniWindow():
-    win = hou.ui.mainQtWindow()
-    return win
+import hou_nodes
 
 
 class MainWindow(QDialog):
@@ -45,6 +43,14 @@ class MainWindow(QDialog):
         )
         central_layout.addWidget(infos_label)
 
+        file_layout = QHBoxLayout()
+        file_widget = QWidget()
+        file_widget.setLayout(file_layout)
+        central_layout.addWidget(file_widget)
+
+        file_path_label = QLabel("MIDI Path :")
+        file_layout.addWidget(file_path_label)
+
         self.file_path_edit = QLineEdit()
         self.file_path_edit.setPlaceholderText("Enter MIDI file path...")
         self.file_path_edit.setStyleSheet(
@@ -54,7 +60,27 @@ class MainWindow(QDialog):
             }
             """
         )
-        central_layout.addWidget(self.file_path_edit)
+        file_layout.addWidget(self.file_path_edit)
+
+        frame_layout = QHBoxLayout()
+        frame_widget = QWidget()
+        frame_widget.setLayout(frame_layout)
+        central_layout.addWidget(frame_widget)
+
+        frame_label = QLabel("Start frame :")
+        frame_layout.addWidget(frame_label)
+
+        self.start_frame_edit = QLineEdit()
+        self.start_frame_edit.setPlaceholderText("Enter start frame...")
+        self.start_frame_edit.setText(str(hou_nodes.get_start_frame()))
+        self.start_frame_edit.setStyleSheet(
+            """
+            QLineEdit{
+                padding: 2px;
+            }
+            """
+        )
+        frame_layout.addWidget(self.start_frame_edit)
 
         self.browse_file_btn = QPushButton("Browse Midi file")
         self.browse_file_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)

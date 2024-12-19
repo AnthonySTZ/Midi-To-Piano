@@ -2,6 +2,10 @@ import hou  # type: ignore
 import midi_handler as midi
 
 
+def get_start_frame():
+    return int(hou.playbar.frameRange()[0])
+
+
 def get_curr_context():
     selected_node = get_selected_node()
     return selected_node.parent()
