@@ -27,11 +27,21 @@ def show_messages_from_track(
 
 def get_all_tracks_from_midi_file(midi_file: mido.MidiFile) -> list[list[dict]]:
     tracks_messages = []
+    tempo: int = get_tempo_from(midi_file)
     for track in midi_file.tracks:
         messages: list[dict] = get_all_notes_from_track(track, midi_file)
         if messages["notes"]:
+            messages["tempo"] = tempo
             tracks_messages.append(messages)
     return tracks_messages
+
+
+def get_tempo_from(midi_file) -> int:
+    for track in midi_file.tracks:
+        for msg in track:
+            if msg.type == "set_tempo":
+                return msg.tempo
+    return 500000
 
 
 def get_all_notes_from_track(
@@ -39,13 +49,9 @@ def get_all_notes_from_track(
 ) -> list[dict]:
     notes: dict[str, int | list[dict]] = {
         "ticks_per_beat": midi_file.ticks_per_beat,
-        "tempo": 500000,
         "notes": [],
     }
     for msg in track:
-        if msg.type == "set_tempo":
-            notes["tempo"] = msg.tempo
-            continue
         if msg.type == "note_on" or msg.type == "note_off":
             note = {
                 "type": msg.type,
