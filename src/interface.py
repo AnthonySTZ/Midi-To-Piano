@@ -62,6 +62,10 @@ class MainWindow(QDialog):
         )
         file_layout.addWidget(self.file_path_edit)
 
+        self.browse_file_btn = QPushButton("Browse Midi file")
+        self.browse_file_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        central_layout.addWidget(self.browse_file_btn)
+
         frame_layout = QHBoxLayout()
         frame_widget = QWidget()
         frame_widget.setLayout(frame_layout)
@@ -81,10 +85,6 @@ class MainWindow(QDialog):
             """
         )
         frame_layout.addWidget(self.start_frame_edit)
-
-        self.browse_file_btn = QPushButton("Browse Midi file")
-        self.browse_file_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        central_layout.addWidget(self.browse_file_btn)
 
         self.accept_btn = QPushButton("Accept")
         central_layout.addWidget(self.accept_btn)
