@@ -57,3 +57,9 @@ def transfer_chop_to_attrib(seleted_node, channel_node):
     wrangle.setInput(0, seleted_node, 0)
 
     wrangle.parm("snippet").set(code)
+
+    parent_node.layoutChildren(
+        items=([channel_node, seleted_node, wrangle]),
+        horizontal_spacing=2.0,
+        vertical_spacing=-1.0,
+    )
