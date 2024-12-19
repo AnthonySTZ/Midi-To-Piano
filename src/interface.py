@@ -102,13 +102,17 @@ class MainWindow(QDialog):
 
     def accept_file(self) -> None:
         file_path: str = self.file_path_edit.text()
+        start_frame: str = self.start_frame_edit.text()
         if not os.path.exists(file_path):
             return
 
         if not file_path.endswith(".mid"):
             return
 
-        piano.run(file_path)
+        if not start_frame.isnumeric():
+            start_frame = hou_nodes.get_start_frame()
+
+        piano.run(file_path, int(start_frame))
         self.close()
 
 
