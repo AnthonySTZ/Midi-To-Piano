@@ -29,8 +29,6 @@ class MainWindow(QDialog):
 
 
 def create_window():
-    # Create the window
     window = MainWindow()
     window.show()
-
     return window
