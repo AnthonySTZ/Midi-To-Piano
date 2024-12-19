@@ -1,4 +1,4 @@
-import hou
+import hou  # type: ignore
 import midi_handler as midi
 
 
