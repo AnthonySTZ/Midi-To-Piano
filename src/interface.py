@@ -8,6 +8,7 @@ from PySide2.QtWidgets import (
     QLineEdit,
     QSizePolicy,
     QFileDialog,
+    QLabel,
 )
 from PySide2.QtCore import Qt
 
@@ -38,6 +39,11 @@ class MainWindow(QDialog):
         )
         central_layout = QVBoxLayout()
         self.setLayout(central_layout)
+
+        infos_label = QLabel(
+            "Be sure to have a 'note' attribute on your points in range 0-87"
+        )
+        central_layout.addWidget(infos_label)
 
         self.file_path_edit = QLineEdit()
         self.file_path_edit.setPlaceholderText("Enter MIDI file path...")
