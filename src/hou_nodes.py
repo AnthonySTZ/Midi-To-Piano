@@ -50,7 +50,7 @@ def set_keyframe(parm, frame, value):
 
 def transfer_chop_to_attrib(seleted_node, channel_node):
     rel_path = seleted_node.relativePathTo(channel_node)
-    code = 'f@active = chf("' + rel_path + '/value" + itoa(@ptnum) + "x");'
+    code = 'f@active = chf("' + rel_path + '/value" + itoa(i@note) + "x");'
 
     parent_node = seleted_node.parent()
     wrangle = parent_node.createNode("attribwrangle", "transfer_animation")
