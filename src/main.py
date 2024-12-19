@@ -10,13 +10,13 @@ def run() -> None:
     from importlib import reload
     import hou_nodes as nodes
     import midi_handler as midi
-    import interface
     import piano
+    import interface
 
     reload(nodes)
     reload(midi)
-    reload(interface)
     reload(piano)
+    reload(interface)
 
 
 run()
