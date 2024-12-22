@@ -16,7 +16,7 @@ Once you're done, you can press the "Accept" button.
 
 ![Interface](/readme/interface.jpg)
 
-## Watch piano plays
+## Visualization
 
 Once pressing "Accept", it will created a chopnet where the note animation will be played, and a point wrangle that it used to transfer this animation to the point using a "active" attribute. You can connect it to your point !
 
@@ -25,3 +25,8 @@ Once pressing "Accept", it will created a chopnet where the note animation will 
 Then you can just use a color node to see the active attribute.
 
 ![Color](/readme/color.jpg)
+
+
+## Watch piano plays
+
+![Piano](/readme/piano.jpg)
